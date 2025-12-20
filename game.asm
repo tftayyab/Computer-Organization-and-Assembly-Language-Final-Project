@@ -141,7 +141,7 @@ print_loop:
         cmp bl, Answer1
         jne WrongAnswer
         add Cash, 100
-        call Correct_Answer  
+          
         ret  
 WrongAnswer:
     call Wrong_Answer
@@ -150,6 +150,7 @@ AskQuestion1 ENDP
 
 AskQuestion2 PROC
     call Intro
+    call Correct_Answer
     mov ecx, 5       ; number of lines in question
     mov esi, 0       ; line index
 print_loop:
@@ -169,7 +170,6 @@ print_loop:
         cmp bl, Answer2
         jne WrongAnswer
         add Cash, 1000
-        call Correct_Answer
         ret 
 WrongAnswer:
     call Wrong_Answer
@@ -178,6 +178,7 @@ AskQuestion2 ENDP
 
 AskQuestion3 PROC
     call Intro
+    call Correct_Answer
     mov ecx, 5       ; number of lines in question
     mov esi, 0       ; line index
 print_loop:
@@ -197,7 +198,6 @@ print_loop:
         cmp bl, Answer3
         jne WrongAnswer
         add Cash, 10000
-        call Correct_Answer
         ret 
 WrongAnswer:
     call Wrong_Answer
@@ -206,6 +206,7 @@ AskQuestion3 ENDP
 
 AskQuestion4 PROC
     call Intro
+    call Correct_Answer
     mov ecx, 5       ; number of lines in question
     mov esi, 0       ; line index
 print_loop:
@@ -225,7 +226,7 @@ print_loop:
         cmp bl, Answer4
         jne WrongAnswer
         add Cash, 100000
-        call Correct_Answer 
+     
         ret
 WrongAnswer:
     call Wrong_Answer
@@ -234,6 +235,7 @@ AskQuestion4 ENDP
 
 AskQuestion5 PROC
     call Intro
+    call Correct_Answer
     mov ecx, 5       ; number of lines in question
     mov esi, 0       ; line index
 print_loop:
@@ -253,7 +255,7 @@ print_loop:
         cmp bl, Answer5
         jne WrongAnswer
         add Cash, 1000000
-        call Correct_Answer
+        
         ret 
 WrongAnswer:
     call Wrong_Answer
