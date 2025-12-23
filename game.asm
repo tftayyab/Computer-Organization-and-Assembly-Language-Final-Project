@@ -104,15 +104,15 @@ Answer4 BYTE "B",0
 Answer5 BYTE "B",0
 
 ;Wrong Answer
-W1 BYTE "|                                             WRONG ANSWER                                            |",0
+W1 BYTE     "|                                             WRONG ANSWER                                            |",0
 
 Wrong DWORD OFFSET Q1, OFFSET W1, OFFSET F1
 ;Correct Answer
-Crore1 BYTE "|                                  Correct Answer! Total Prize: 1 Crore                               |",0
-Crore3 BYTE "|                                  Correct Answer! Total Prize: 3 Crore                               |",0
-Crore4 BYTE "|                                  Correct Answer! Total Prize: 4 Crore                               |",0
-Crore5 BYTE "|                                  Correct Answer! Total Prize: 5 Crore                               |",0
-Crore7 BYTE       "|                                  Correct Answer! Total Prize: 7 Crore                               |",0
+Crore1 BYTE "|                                      For Total Prize of 1 Crore                                     |",0
+Crore3 BYTE "|                                Correct Answer! For Total Prize: 3 Crore                             |",0
+Crore4 BYTE "|                                Correct Answer! For Total Prize: 4 Crore                             |",0
+Crore5 BYTE "|                                Correct Answer! For Total Prize: 5 Crore                             |",0
+Crore7 BYTE "|                         SAATHH CROORRREE! APP BAN GAII HAIIII CROORRE PATTTTIII                     |",0
 
 Correct1 DWORD OFFSET Q1,OFFSET Crore1,OFFSET F1
 Correct2 DWORD OFFSET Q1,OFFSET Crore3,OFFSET F1
@@ -148,7 +148,7 @@ main PROC
     mov esi, offset Question1
     mov edi, offset Answer1
     mov ebx, 1    ; Question 1
-    mov ecx, 0
+    mov ecx, 1
     call AskQuestion
     
     mov esi, offset Question2
