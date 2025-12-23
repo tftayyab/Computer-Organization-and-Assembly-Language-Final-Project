@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assembly Language Game Code Explanation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        
+        h2 {
+            color: #34495e;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-left: 10px;
+            border-left: 4px solid #3498db;
+        }
+        
+        h3 {
+            color: #555;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+        
+        .code-block {
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+            white-space: pre;
+        }
+        
+        .code-line {
+            margin: 5px 0;
+            padding: 3px 0;
+        }
+        
+        .line-number {
+            color: #999;
+            margin-right: 10px;
+            font-weight: normal;
+        }
+        
+        .explanation {
+            background-color: #e8f4f8;
+            border-left: 3px solid #3498db;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .explanation p {
+            margin: 8px 0;
+        }
+        
+        .highlight {
+            background-color: #fff3cd;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        
+        .note {
+            background-color: #fff9e6;
+            border-left: 3px solid #ffc107;
+            padding: 12px;
+            margin: 15px 0;
+            font-style: italic;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            page-break-inside: avoid;
+        }
+        
+        ul, ol {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+        
+        li {
+            margin: 5px 0;
+        }
+        
+        @media print {
+            body {
+                background-color: white;
+                padding: 0;
+            }
+            
+            .container {
+                box-shadow: none;
+                padding: 20px;
+            }
+            
+            .code-block {
+                page-break-inside: avoid;
+            }
+            
+            .section {
+                page-break-inside: avoid;
+            }
+            
+            h2 {
+                page-break-after: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Assembly Language Game Code Explanation</h1>
+        <p style="font-size: 18px; margin-bottom: 30px;">
+            <strong>Game:</strong> Kaun Banay Ga Crore Patti (Who Wants to Be a Millionaire)<br>
+            <strong>Language:</strong> x86 Assembly (MASM with Irvine32 library)<br>
+            <strong>Purpose:</strong> This document explains each section of the assembly code in detail.
+        </p>
+
+        <!-- Section 1: Header and Includes -->
+        <div class="section">
+            <h2>Section 1: Header and Library Includes</h2>
+            
+            <div class="code-block">INCLUDE Irvine32.inc</div>
+            
+            <div class="explanation">
+                <h3>Line 1: INCLUDE Irvine32.inc</h3>
+                <p><strong>What it does:</strong> This directive includes the Irvine32 library, which provides useful functions for input/output operations in assembly language.</p>
+                <p><strong>Why it's used:</strong> The Irvine32 library contains pre-written procedures like:
+                    <ul>
+                        <li><code>WriteString</code> - to display text</li>
+                        <li><code>ReadString</code> - to read user input</li>
+                        <li><code>ClrScr</code> - to clear the screen</li>
+                        <li><code>Crlf</code> - to print a new line</li>
+                        <li><code>exit</code> - to exit the program</li>
+                    </ul>
+                </p>
+                <p><strong>How it works:</strong> The assembler copies all the code from Irvine32.inc into this file during compilation, making all those functions available to use.</p>
+            </div>
+        </div>
+
+        <!-- Section 2: Data Section - Title and ASCII Art -->
+        <div class="section">
+            <h2>Section 2: Data Section - Title and ASCII Art</h2>
+            
+            <div class="code-block">.data
+
+title1 BYTE "                        *** WELCOME TO KAUN BANAY GA CRORE PATTI ***                            ",0</div>
+            
+            <div class="explanation">
+                <h3>Line 4: .data</h3>
+                <p><strong>What it does:</strong> Marks the beginning of the data section where all variables and constants are declared.</p>
+                <p><strong>Why it's used:</strong> In assembly, you need to separate data (variables) from code (instructions). The <code>.data</code> section is where you store all your strings, numbers, and arrays.</p>
+                
+                <h3>Line 6: title1 BYTE "                        *** WELCOME TO KAUN BANAY GA CRORE PATTI ***                            ",0</h3>
+                <p><strong>What it does:</strong> Creates a string variable called <code>title1</code> that contains the game's welcome message with decorative asterisks and centered formatting.</p>
+                <p><strong>Why it's used:</strong> This is the title that will be displayed at the start of the game. The asterisks and spacing create a visually appealing header.</p>
+                <p><strong>How it works:</strong>
+                    <ul>
+                        <li><code>title1</code> - the name of the variable</li>
+                        <li><code>BYTE</code> - declares it as a byte array (each character is 1 byte)</li>
+                        <li>The text in quotes - the actual string content with formatting spaces and asterisks</li>
+                        <li><code>,0</code> - null terminator (marks the end of the string, required for string functions)</li>
+                    </ul>
+                </p>
+            </div>
+
+            <div class="code-block">;Drawing of amitab bachan
+L1 BYTE "                                                                                                    ",0
+L2 BYTE "                                          ++==+++=**+++*                                            ",0
+... (lines 8-47 contain ASCII art lines L1 through L39)</div>
+            
+            <div class="explanation">
+                <h3>Lines 8-47: ASCII Art Drawing</h3>
+                <p><strong>What it does:</strong> Creates 39 separate string variables (L1 through L39), each containing one line of ASCII art that forms a picture of Amitabh Bachchan.</p>
+                <p><strong>Why it's used:</strong> This creates a visual element for the game, making it more engaging. Each line (L1, L2, L3, etc.) represents one row of the ASCII art.</p>
+                <p><strong>How it works:</strong>
+                    <ul>
+                        <li>Each <code>L# BYTE "..."</code> creates a string variable</li>
+                        <li>The characters (+, *, #, @, etc.) form the picture when printed line by line</li>
+                        <li>All lines end with <code>,0</code> (null terminator)</li>
+                    </ul>
+                </p>
+            </div>
+
+            <div class="code-block">drawing DWORD OFFSET L1, OFFSET L2, OFFSET L3, ..., OFFSET L39</div>
+            
+            <div class="explanation">
+                <h3>Line 49: drawing Array</h3>
+                <p><strong>What it does:</strong> Creates an array called <code>drawing</code> that stores the memory addresses (offsets) of all 39 ASCII art lines.</p>
+                <p><strong>Why it's used:</strong> Instead of manually printing each line, we can loop through this array to print all lines automatically.</p>
+                <p><strong>How it works:</strong>
+                    <ul>
+                        <li><code>DWORD</code> - each element is 4 bytes (32-bit address)</li>
+                        <li><code>OFFSET L1</code> - gets the memory address where L1 is stored</li>
+                        <li>The array contains 39 addresses, one for each line</li>
+                        <li>We can access <code>drawing[0]</code> to get L1's address, <code>drawing[1]</code> for L2, etc.</li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+
+        <!-- Section 3: Questions and Answers -->
+        <div class="section">
+            <h2>Section 3: Questions and Answers</h2>
+            
+            <div class="code-block">; Question 1
+Q1 BYTE " _____________________________________________________________________________________________________ ",0
+A1 BYTE "|                                             QUESTION 1                                              |",0
+B1 BYTE "|                                     Who wrote Romeo and Juliet?                                     |",0
+C1 BYTE "|                                                                                                     |",0
+D1 BYTE "|       A. Charles Dickens                                                  C. Jane Austen            |",0
+E1 BYTE "|       B. William Shakespeare                                              D. Mark Twain             |",0 
+G1 BYTE "|                                        E. Choose a lifeline                                         |",0
+F1 BYTE "|_____________________________________________________________________________________________________|",0</div>
+            
+            <div class="explanation">
+                <h3>Lines 51-59: Question 1 Structure (Box Format)</h3>
+                <p><strong>What it does:</strong> Defines the first question in a formatted box display with borders made of underscores and pipes.</p>
+                <p><strong>Why it's used:</strong> The box format makes the questions visually appealing and easier to read, similar to a TV game show display.</p>
+                <p><strong>How it works:</strong>
+                    <ul>
+                        <li><code>Q1</code> - top border line (underscores)</li>
+                        <li><code>A1</code> - question header line ("QUESTION 1")</li>
+                        <li><code>B1</code> - the actual question text</li>
+                        <li><code>C1</code> - empty/spacing line</li>
+                        <li><code>D1</code> - first row of options (A and C side by side)</li>
+                        <li><code>E1</code> - second row of options (B and D side by side)</li>
+                        <li><code>G1</code> - lifeline option line</li>
+                        <li><code>F1</code> - bottom border line (underscores)</li>
+                        <li>All are <code>BYTE</code> arrays (strings) ending with <code>,0</code></li>
+                    </ul>
+                </p>
+                <p><strong>Note:</strong> Questions 2-5 (lines 61-83) reuse Q1, F1, C1, and G1 for borders/formatting, and only define their unique content (A2-A5 for headers, B2-B5 for questions, D2-D5 and E2-E5 for options).</p>
+            </div>
+
+            <div class="code-block">; Questions arrays
+Question1 DWORD OFFSET Q1, OFFSET A1, OFFSET B1, OFFSET C1, OFFSET D1, OFFSET E1, OFFSET G1, OFFSET F1
+Question2 DWORD OFFSET Q1, OFFSET A2, OFFSET B2, OFFSET C1, OFFSET D2, OFFSET E2, OFFSET G1, OFFSET F1
+... (similar for Question3, Question4, Question5)</div>
+            
+            <div class="explanation">
+                <h3>Lines 85-90: Question Arrays</h3>
+                <p><strong>What it does:</strong> Creates arrays for each question that store the addresses of all 8 display lines needed to render the question box.</p>
+                <p><strong>Why it's used:</strong> This allows the program to loop through and display all 8 lines of the question box format automatically.</p>
+                <p><strong>How it works:</strong>
+                    <ul>
+                        <li><code>Question1[0]</code> = address of Q1 (top border)</li>
+                        <li><code>Question1[1]</code> = address of A1 (question header)</li>
+                        <li><code>Question1[2]</code> = address of B1 (question text)</li>
+                        <li><code>Question1[3]</code> = address of C1 (empty line)</li>
+                        <li><code>Question1[4]</code> = address of D1 (first option row: A and C)</li>
+                        <li><code>Question1[5]</code> = address of E1 (second option row: B and D)</li>
+                        <li><code>Question1[6]</code> = address of G1 (lifeline option)</li>
+                        <li><code>Question1[7]</code> = address of F1 (bottom border)</li>
+                    </ul>
+                    <p>Note that Questions 2-5 share Q1 (top border), C1 (empty line), G1 (lifeline option), and F1 (bottom border) for consistency.</p>
+                </p>
+            </div>
+
+            <div class="code-block">; 5050Questions arrays
+Question1not DWORD OFFSET Q1, OFFSET A1, OFFSET B1, OFFSET C1, OFFSET C1, OFFSET E1, OFFSET G1, OFFSET F1
+Question2not DWORD OFFSET Q1, OFFSET A2, OFFSET B2, OFFSET C1, OFFSET C1, OFFSET E2, OFFSET G1, OFFSET F1
+... (similar for Question3not, Question4not, Question5not)</div>
+            
+            <div class="explanation">
+                <h3>Lines 92-97: 50:50 Lifeline Question Arrays</h3>
+                <p><strong>What it does:</strong> Creates special versions of each question array for the 50:50 lifeline, which removes two wrong answers.</p>
+                <p><strong>Why it's used:</strong> When the 50:50 lifeline is used, the question needs to be displayed with only 2 options (one correct, one wrong) instead of 4.</p>
+                <p><strong>How it works:</strong>
+                    <ul>
+                        <li>These arrays have the same structure as regular Question arrays (8 elements)</li>
+                        <li>They use <code>OFFSET C1</code> (empty line) to replace the options that should be hidden</li>
+                        <li>For example, <code>Question1not</code> hides option A by replacing D1 with C1 (empty), showing only B and D options</li>
+                        <li>The correct answer option (E1 in Question1not) is always kept visible</li>
+                        <li>One wrong option is also kept visible to maintain the challenge</li>
+                    </ul>
+                </p>
+            </div>
+
+            <div class="code-block">Answer1 BYTE "B",0 
+Answer2 BYTE "D",0
+Answer3 BYTE "A",0
+Answer4 BYTE "B",0
+Answer5 BYTE "B",0</div>
+            
+            <div class="explanation">
+                <h3>Lines 100-104: Correct Answers</h3>
+                <p><strong>What it does:</strong> Stores the correct answer letter for each question.</p>
+                <p><strong>Why it's used:</strong> When the user inputs their answer, the program compares it with these values to check if it's correct.</p>
+                <p><strong>How it works:</strong>
+                    <ul>
+                        <li><code>Answer1 = "B"</code> means the correct answer for Question 1 is option B (William Shakespeare)</li>
+                        <li><code>Answer2 = "D"</code> means Question 2's answer is D (Pacific Ocean)</li>
+                        <li><code>Answer3 = "A"</code> means Question 3's answer is A (Hearing)</li>
+                        <li><code>Answer4 = "B"</code> means Question 4's answer is B (Bubble Wrap)</li>
+                        <li><code>Answer5 = "B"</code> means Question 5's answer is B (Japan)</li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+
+        <!-- Section 4: Game Messages and Input -->
+        <div class="section">
+            <h2>Section 4: Game Messages and Input Buffer</h2>
+            
+            <div class="code-block">;Wrong Answer
+W1 BYTE "|                                             WRONG ANSWER                                            |",0
+
+Wrong DWORD OFFSET Q1, OFFSET W1, OFFSET F1
+;Correct Answer
+Crore1 BYTE "|                                  Correct Answer! Total Prize: 1 Crore                               |",0
+Crore3 BYTE "|                                  Correct Answer! Total Prize: 3 Crore                               |",0
+Crore4 BYTE "|                                  Correct Answer! Total Prize: 4 Crore                               |",0
+Crore5 BYTE "|                                  Correct Answer! Total Prize: 5 Crore                               |",0
+Crore7 BYTE "|                                  Correct Answer! Total Prize: 7 Crore                               |",0
+
+Correct1 DWORD OFFSET Q1,OFFSET Crore1,OFFSET F1
+Correct2 DWORD OFFSET Q1,OFFSET Crore3,OFFSET F1
+Correct3 DWORD OFFSET Q1,OFFSET Crore4,OFFSET F1
+Correct4 DWORD OFFSET Q1,OFFSET Crore5,OFFSET F1
+Correct5 DWORD OFFSET Q1,OFFSET Crore7,OFFSET F1
+
+Input BYTE 2,0</div>
+            
+            <div class="explanation">
+                <h3>Lines 106-123: Game Messages and Input</h3>
+                <p><strong>What it does:</strong> Defines strings for game feedback in box format and a buffer to store user input.</p>
+                <p><strong>Why it's used:</strong>
+                    <ul>
+                        <li><code>W1</code> - wrong answer message text (in box format)</li>
+                        <li><code>Wrong</code> - array containing top border (Q1), wrong message (W1), and bottom border (F1)</li>
+                        <li><code>Crore1, Crore3, Crore4, Crore5, Crore7</code> - prize messages in box format for each question</li>
+                        <li><code>Correct1-Correct5</code> - arrays containing top border, prize message, and bottom border for each question</li>
+                        <li><code>Input</code> - buffer to store the user's input (answer choice)</li>
+                    </ul>
+                </p>
+                <p><strong>How it works:</strong>
+                    <ul>
+                        <li><code>Input BYTE 2,0</code> creates a 2-byte buffer (can store 1 character + null terminator)</li>
+                        <li>The prize amounts correspond to questions: Q1=1 Crore, Q2=3 Crore, Q3=4 Crore, Q4=5 Crore, Q5=7 Crore</li>
+                        <li>Wrong and Correct messages use the same box format (Q1 top border, message, F1 bottom border) for visual consistency</li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+
+        <!-- Section 5: Lifeline System -->
+        <div class="section">
+            <h2>Section 5: Lifeline System</h2>
+            
+            <div class="code-block">; Lifeline tracking
+Lifeline5050 DWORD 0
+LifelineFriend DWORD 0</div>
+            
+            <div class="explanation">
+                <h3>Lines 125-127: Lifeline Tracking Variables</h3>
+                <p><strong>What it does:</strong> Creates two variables (one for each lifeline) that track whether each lifeline has been used.</p>
+                <p><strong>Why it's used:</strong> Each lifeline can only be used once. These variables store 0 (not used) or 1 (used) to prevent reusing lifelines.</p>
+                <p><strong>How it works:</strong>
+                    <ul>
+                        <li>All start at <code>0</code> (not used)</li>
+                        <li>When a lifeline is used, its variable is set to <code>1</code></li>
+                        <li>Before using a lifeline, the program checks if it's already 1</li>
+                        <li>The game has 2 lifelines: 50:50 and Ask A Friend</li>
+                    </ul>
+                </p>
+            </div>
+
+            <div class="code-block">; Lifeline strings
+LifelineMenu BYTE    "|                                    Available Lifelines                                              |",0
+Lifeline1 BYTE       "|                                         1. 50:50                                                    |",0
+Lifeline2 BYTE       "|                                      2. Ask A Friend                                                |",0
+LifelineUsedMsg BYTE "|                              This lifeline has already been used!                                   |",0
+ChooseLifeline BYTE  "|                      Choose a lifeline (1-2) or press any other key to go back:                     | ",0
+
+LifelineMenuPrompt DWORD OFFSET Q1, OFFSET LifelineMenu, OFFSET C1, OFFSET Lifeline1, OFFSET Lifeline2, OFFSET C1, OFFSET ChooseLifeline, OFFSET F1
+LifelineUsedPrompt DWORD OFFSET Q1, OFFSET LifelineUsedMsg, OFFSET F1</div>
+            
+            <div class="explanation">
+                <h3>Lines 130-138: Lifeline Display Strings and Arrays</h3>
+                <p><strong>What it does:</strong> Defines all the text strings needed to display and interact with the lifeline system in box format.</p>
+                <p><strong>Why it's used:</strong> These strings are displayed to the user when they want to use a lifeline or when viewing the lifeline menu, maintaining the box format for visual consistency.</p>
+                <p><strong>How it works:</strong>
+                    <ul>
+                        <li><code>LifelineMenu</code> - header for the lifeline menu (in box format)</li>
+                        <li><code>Lifeline1</code> - 50:50 lifeline option (in box format)</li>
+                        <li><code>Lifeline2</code> - Ask A Friend lifeline option (in box format)</li>
+                        <li><code>LifelineUsedMsg</code> - error message if trying to use an already-used lifeline (in box format)</li>
+                        <li><code>ChooseLifeline</code> - prompt asking user to select a lifeline (in box format)</li>
+                        <li><code>LifelineMenuPrompt</code> - array of 8 elements containing the complete lifeline menu display (Q1 top border, menu header, empty line, lifeline options, empty line, prompt, F1 bottom border)</li>
+                        <li><code>LifelineUsedPrompt</code> - array of 3 elements for the "lifeline already used" message (Q1, message, F1)</li>
+                    </ul>
+                </p>
+            </div>
+
+            <div class="code-block">; Global variables for generic question procedure
+CurrentQuestion DWORD 0
+CurrentAnswer DWORD 0
+CurrentQuestionNum DWORD 0  ; Question number (1-5)
+ShowCorrectFlag DWORD 0</div>
+            
+            <div class="explanation">
+                <h3>Lines 140-144: Global State Variables</h3>
+                <p><strong>What it does:</strong> Stores information about the current question being asked.</p>
+                <p><strong>Why it's used:</strong> These variables allow different procedures to access information about the current question without passing parameters repeatedly.</p>
+                <p><strong>How it works:</strong>
+                    <ul>
+                        <li><code>CurrentQuestion</code> - stores address of the current question's array</li>
+                        <li><code>CurrentAnswer</code> - stores address of the current question's correct answer</li>
+                        <li><code>CurrentQuestionNum</code> - stores the question number (1-5)</li>
+                        <li><code>ShowCorrectFlag</code> - flag to determine if prize should be shown (0=no, 1=yes)</li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+
+        <!-- Section 6: Main Procedure -->
+        <div class="section">
+            <h2>Section 6: Main Procedure - Program Entry Point</h2>
+            
+            <div class="code-block">.code
+main PROC
+    mov esi, offset Question1
+    mov edi, offset Answer1
+    mov ebx, 1    ; Question 1
+    mov ecx, 0
+    call AskQuestion
+    
+    mov esi, offset Question2
+    mov edi, offset Answer2
+    mov ebx, 2    ; Question 2
+    mov ecx, 1
+    call AskQuestion
+    
+    ... (similar for Question3, Question4, Question5)
+    
+    exit
+main ENDP</div>
+            
+            <div class="explanation">
+                <h3>Line 146: .code</h3>
+                <p><strong>What it does:</strong> Marks the beginning of the code section where all executable instructions are written.</p>
+                <p><strong>Why it's used:</strong> Separates code from data. Everything after <code>.code</code> contains the actual program logic.</p>
+                
+                <h3>Lines 147-179: main Procedure</h3>
+                <p><strong>What it does:</strong> This is the entry point of the program - the first code that runs when the program starts.</p>
+                <p><strong>Why it's used:</strong> The <code>main</code> procedure orchestrates the entire game by calling <code>AskQuestion</code> for each of the 5 questions in sequence.</p>
+                <p><strong>How it works - Line by Line:</strong></p>
+                <ul>
+                    <li><strong>Line 148:</strong> <code>mov esi, offset Question1</code> - Loads the address of Question1 array into register ESI</li>
+                    <li><strong>Line 149:</strong> <code>mov edi, offset Answer1</code> - Loads the address of Answer1 into register EDI</li>
+                    <li><strong>Line 150:</strong> <code>mov ebx, 1</code> - Sets EBX to 1 (question number)</li>
+                    <li><strong>Line 151:</strong> <code>mov ecx, 0</code> - Sets ECX to 0 (don't show prize yet for first question)</li>
+                    <li><strong>Line 152:</strong> <code>call AskQuestion</code> - Calls the procedure to ask question 1</li>
+                    <li><strong>Lines 154-158:</strong> Same setup for Question 2, but <code>ecx = 1</code> (show prize after Q1)</li>
+                    <li><strong>Lines 160-176:</strong> Repeats for Questions 3, 4, and 5</li>
+                    <li><strong>Line 178:</strong> <code>exit</code> - Terminates the program when all questions are done</li>
+                </ul>
+                <p><strong>Register Usage:</strong>
+                    <ul>
+                        <li><code>ESI</code> - Source Index (holds question array address)</li>
+                        <li><code>EDI</code> - Destination Index (holds answer address)</li>
+                        <li><code>EBX</code> - Base Register (holds question number)</li>
+                        <li><code>ECX</code> - Counter Register (holds show prize flag)</li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+
+        <!-- Section 7: AskQuestion Procedure -->
+        <div class="section">
+            <h2>Section 7: AskQuestion Procedure - Core Game Logic</h2>
+            
+            <div class="code-block">; Generic AskQuestion procedure
+; esi = question array offset, edi = answer offset, ebx = question number (1-5), ecx = show correct flag (0/1)
+AskQuestion PROC
+    mov CurrentQuestion, esi
+    mov CurrentAnswer, edi
+    mov CurrentQuestionNum, ebx
+    mov ShowCorrectFlag, ecx</div>
+            
+            <div class="explanation">
+                <h3>Lines 183-187: AskQuestion Setup</h3>
+                <p><strong>What it does:</strong> This procedure handles asking a question, getting user input, checking the answer, and managing lifelines.</p>
+                <p><strong>Why it's used:</strong> Instead of writing the same code 5 times, we use one reusable procedure that works for any question.</p>
+                <p><strong>How it works - Line by Line:</strong></p>
+                <ul>
+                    <li><strong>Line 184:</strong> <code>mov CurrentQuestion, esi</code> - Saves the question array address to a global variable</li>
+                    <li><strong>Line 185:</strong> <code>mov CurrentAnswer, edi</code> - Saves the answer address to a global variable</li>
+                    <li><strong>Line 186:</strong> <code>mov CurrentQuestionNum, ebx</code> - Saves the question number (1-5)</li>
+                    <li><strong>Line 187:</strong> <code>mov ShowCorrectFlag, ecx</code> - Saves whether to show prize (0 or 1)</li>
+                </ul>
+            </div>
+
+            <div class="code-block">question_loop:
+    call Intro
+    cmp ShowCorrectFlag, 1
+    jne skip_correct
+    call Correct_Answer
+skip_correct:</div>
+            
+            <div class="explanation">
+                <h3>Lines 189-194: Display Intro and Prize</h3>
+                <p><strong>What it does:</strong> Clears screen, shows ASCII art, and displays prize if this isn't the first question.</p>
+                <p><strong>How it works - Line by Line:</strong></p>
+                <ul>
+                    <li><strong>Line 189:</strong> <code>question_loop:</code> - Label (jump target if user wants to use lifeline again)</li>
+                    <li><strong>Line 190:</strong> <code>call Intro</code> - Calls procedure to clear screen and display title + ASCII art</li>
+                    <li><strong>Line 191:</strong> <code>cmp ShowCorrectFlag, 1</code> - Compares flag with 1</li>
+                    <li><strong>Line 192:</strong> <code>jne skip_correct</code> - Jump if Not Equal (if flag is 0, skip showing prize)</li>
+                    <li><strong>Line 193:</strong> <code>call Correct_Answer</code> - Shows "Correct Answer! Total Prize: X Crore" in box format</li>
+                    <li><strong>Line 194:</strong> <code>skip_correct:</code> - Label to skip prize display</li>
+                </ul>
+            </div>
+
+            <div class="code-block">    ; Display question
+    mov ecx, 8
+    mov esi, 0
+print_loop:
+    mov edx, CurrentQuestion
+    mov edx, [edx+esi*4]
+    call WriteString
+    call Crlf
+    inc esi
+    loop print_loop</div>
+            
+            <div class="explanation">
+                <h3>Lines 196-205: Display Question and Options</h3>
+                <p><strong>What it does:</strong> Loops through the question array to print all 8 lines of the question box (top border, header, question, empty line, options, lifeline option, bottom border).</p>
+                <p><strong>How it works - Line by Line:</strong></p>
+                <ul>
+                    <li><strong>Line 197:</strong> <code>mov ecx, 8</code> - Sets loop counter to 8 (8 lines in the question box format)</li>
+                    <li><strong>Line 198:</strong> <code>mov esi, 0</code> - Sets array index to 0</li>
+                    <li><strong>Line 199:</strong> <code>print_loop:</code> - Label marking start of loop</li>
+                    <li><strong>Line 200:</strong> <code>mov edx, CurrentQuestion</code> - Loads address of question array into EDX</li>
+                    <li><strong>Line 201:</strong> <code>mov edx, [edx+esi*4]</code> - Gets address at index ESI (dereferences array element)
+                        <ul>
+                            <li><code>[edx+esi*4]</code> means: address = edx + (esi × 4 bytes)</li>
+                            <li>Since each DWORD is 4 bytes, we multiply index by 4</li>
+                            <li>ESI=0 gets top border (Q1), ESI=1 gets header, ESI=2 gets question text, ESI=3 gets empty line, ESI=4 gets first option row, ESI=5 gets second option row, ESI=6 gets lifeline option, ESI=7 gets bottom border</li>
+                        </ul>
+                    </li>
+                    <li><strong>Line 202:</strong> <code>call WriteString</code> - Prints the string at address in EDX</li>
+                    <li><strong>Line 203:</strong> <code>call Crlf</code> - Prints a new line</li>
+                    <li><strong>Line 204:</strong> <code>inc esi</code> - Increments index (ESI = ESI + 1)</li>
+                    <li><strong>Line 205:</strong> <code>loop print_loop</code> - Decrements ECX, jumps to print_loop if ECX > 0</li>
+                </ul>
+            </div>
+
+            <div class="code-block">    mov edx, offset Input
+    mov ecx, sizeof Input
+    call ReadString
+    
+    mov bl, [Input]
+    cmp bl, 'E'
+    je use_lifeline
+    cmp bl, 'e'
+    je use_lifeline</div>
+            
+            <div class="explanation">
+                <h3>Lines 207-215: Get User Input and Check for Lifeline</h3>
+                <p><strong>What it does:</strong> Reads user input and checks if user wants to use a lifeline (the lifeline option is already displayed as part of the question box).</p>
+                <p><strong>How it works - Line by Line:</strong></p>
+                <ul>
+                    <li><strong>Line 207:</strong> <code>mov edx, offset Input</code> - Sets EDX to input buffer address</li>
+                    <li><strong>Line 208:</strong> <code>mov ecx, sizeof Input</code> - Sets ECX to buffer size (2 bytes)</li>
+                    <li><strong>Line 209:</strong> <code>call ReadString</code> - Reads user input and stores it in Input buffer</li>
+                    <li><strong>Line 211:</strong> <code>mov bl, [Input]</code> - Loads first character of input into BL register
+                        <ul>
+                            <li><code>[Input]</code> means "value at address Input" (dereferencing)</li>
+                            <li>BL is the lower 8 bits of EBX register</li>
+                        </ul>
+                    </li>
+                    <li><strong>Line 212:</strong> <code>cmp bl, 'E'</code> - Compares input with uppercase 'E'</li>
+                    <li><strong>Line 213:</strong> <code>je use_lifeline</code> - Jump if Equal (if input is 'E', go to lifeline menu)</li>
+                    <li><strong>Line 214:</strong> <code>cmp bl, 'e'</code> - Compares input with lowercase 'e'</li>
+                    <li><strong>Line 215:</strong> <code>je use_lifeline</code> - Jump if Equal (if input is 'e', go to lifeline menu)</li>
+                </ul>
+            </div>
+
+            <div class="code-block">    mov edi, CurrentAnswer
+    cmp bl, [edi]
+    jne WrongAnswer
+    call Correct_Answer
+    ret</div>
+            
+            <div class="explanation">
+                <h3>Lines 217-221: Check Answer (If Not Lifeline)</h3>
+                <p><strong>What it does:</strong> Compares user's answer with the correct answer.</p>
+                <p><strong>How it works - Line by Line:</strong></p>
+                <ul>
+                    <li><strong>Line 217:</strong> <code>mov edi, CurrentAnswer</code> - Loads address of correct answer into EDI</li>
+                    <li><strong>Line 218:</strong> <code>cmp bl, [edi]</code> - Compares user input (BL) with correct answer character
+                        <ul>
+                            <li><code>[edi]</code> gets the character at the answer address (e.g., 'B')</li>
+                        </ul>
+                    </li>
+                    <li><strong>Line 219:</strong> <code>jne WrongAnswer</code> - Jump if Not Equal (if answer is wrong, go to WrongAnswer)</li>
+                    <li><strong>Line 220:</strong> <code>call Correct_Answer</code> - If answer is correct, show prize message in box format</li>
+                    <li><strong>Line 221:</strong> <code>ret</code> - Return to main procedure (question answered correctly)</li>
+                </ul>
+            </div>
+
+            <div class="code-block">use_lifeline:
+    call ShowLifelineMenu
+    mov bl, [Input]
+    call HandleLifeline
+    
+    ; Get answer after lifeline
+    mov edx, offset Input
+    mov ecx, sizeof Input
+    call ReadString
+    
+    mov bl, [Input]
+    cmp bl, 'E'
+    je use_lifeline
+    cmp bl, 'e'
+    je use_lifeline
+    
+    mov edi, CurrentAnswer
+    cmp bl, [edi]
+    jne WrongAnswer
+    call Correct_Answer
+    ret</div>
+            
+            <div class="explanation">
+                <h3>Lines 223-243: Lifeline Handling</h3>
+                <p><strong>What it does:</strong> Handles lifeline selection and gets answer after using lifeline.</p>
+                <p><strong>How it works - Line by Line:</strong></p>
+                <ul>
+                    <li><strong>Line 223:</strong> <code>use_lifeline:</code> - Label for lifeline code</li>
+                    <li><strong>Line 224:</strong> <code>call ShowLifelineMenu</code> - Displays lifeline menu in box format and gets user's lifeline choice</li>
+                    <li><strong>Line 225:</strong> <code>mov bl, [Input]</code> - Loads lifeline choice (1-2) into BL</li>
+                    <li><strong>Line 226:</strong> <code>call HandleLifeline</code> - Processes the selected lifeline</li>
+                    <li><strong>Lines 229-231:</strong> Reads user's answer after using lifeline</li>
+                    <li><strong>Lines 233-237:</strong> Checks if user wants to use another lifeline (loops back if 'E' or 'e')</li>
+                    <li><strong>Lines 239-242:</strong> Checks if answer is correct (same as before)</li>
+                </ul>
+            </div>
+
+            <div class="code-block">WrongAnswer:
+    call Wrong_Answer
+    ret
+AskQuestion ENDP</div>
+            
+            <div class="explanation">
+                <h3>Lines 245-248: Wrong Answer Handler</h3>
+                <p><strong>What it does:</strong> Handles incorrect answers by displaying error message in box format and exiting.</p>
+                <p><strong>How it works:</strong></p>
+                <ul>
+                    <li><strong>Line 245:</strong> <code>WrongAnswer:</code> - Label for wrong answer code</li>
+                    <li><strong>Line 246:</strong> <code>call Wrong_Answer</code> - Calls procedure to show "Wrong Answer" in box format and exit</li>
+                    <li><strong>Line 247:</strong> <code>ret</code> - Returns (though program exits in Wrong_Answer procedure)</li>
+                    <li><strong>Line 248:</strong> <code>AskQuestion ENDP</code> - Marks end of AskQuestion procedure</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Section 8: Lifeline Procedures -->
+        <div class="section">
+            <h2>Section 8: Lifeline Handling Procedures</h2>
+            
+            <div class="code-block">; Handle lifeline selection
+; bl = lifeline choice ('1'-'2')
+HandleLifeline PROC
+    cmp bl, '1'
+    je lifeline_5050
+    cmp bl, '2'
+    je lifeline_friend
+    ret</div>
+            
+            <div class="explanation">
+                <h3>Lines 250-257: HandleLifeline - Route to Specific Lifeline</h3>
+                <p><strong>What it does:</strong> Checks which lifeline was selected (1-2) and jumps to the appropriate handler.</p>
+                <p><strong>How it works - Line by Line:</strong></p>
+                <ul>
+                    <li><strong>Line 253:</strong> <code>cmp bl, '1'</code> - Compares input with '1'</li>
+                    <li><strong>Line 254:</strong> <code>je lifeline_5050</code> - Jump if Equal to 50:50 handler</li>
+                    <li><strong>Line 255:</strong> <code>cmp bl, '2'</code> - Compares input with '2'</li>
+                    <li><strong>Line 256:</strong> <code>je lifeline_friend</code> - Jump if Equal to Ask A Friend handler</li>
+                    <li><strong>Line 257:</strong> <code>ret</code> - Return if no valid lifeline selected</li>
+                </ul>
+            </div>
+
+            <div class="code-block">lifeline_5050:
+    cmp Lifeline5050, 1
+    je lifeline_used
+    mov Lifeline5050, 1
+    mov esi, CurrentQuestion
+    mov edi, CurrentAnswer
+    mov bl, [edi]
+    sub bl, 'A'
+    movzx ebx, bl
+    call DisplayQuestion5050
+    ret</div>
+            
+            <div class="explanation">
+                <h3>Lines 259-269: 50:50 Lifeline Handler</h3>
+                <p><strong>What it does:</strong> Implements the 50:50 lifeline that removes two wrong answers, leaving the correct answer and one wrong answer displayed in the question box format.</p>
+                <p><strong>How it works - Line by Line:</strong></p>
+                <ul>
+                    <li><strong>Line 260:</strong> <code>cmp Lifeline5050, 1</code> - Checks if 50:50 already used</li>
+                    <li><strong>Line 261:</strong> <code>je lifeline_used</code> - Jump to error message if already used</li>
+                    <li><strong>Line 262:</strong> <code>mov Lifeline5050, 1</code> - Marks 50:50 as used</li>
+                    <li><strong>Line 263:</strong> <code>mov esi, CurrentQuestion</code> - Loads question array address (not used in this version, but kept for compatibility)</li>
+                    <li><strong>Line 264:</strong> <code>mov edi, CurrentAnswer</code> - Loads answer address</li>
+                    <li><strong>Line 265:</strong> <code>mov bl, [edi]</code> - Gets correct answer letter (e.g., 'B')</li>
+                    <li><strong>Line 266:</strong> <code>sub bl, 'A'</code> - Converts letter to number (A=0, B=1, C=2, D=3)
+                        <ul>
+                            <li>If answer is 'B', then 'B' - 'A' = 66 - 65 = 1</li>
+                        </ul>
+                    </li>
+                    <li><strong>Line 267:</strong> <code>movzx ebx, bl</code> - Zero-extends BL to EBX (converts 8-bit to 32-bit)</li>
+                    <li><strong>Line 268:</strong> <code>call DisplayQuestion5050</code> - Displays question using QuestionXnot array with only 2 options visible</li>
+                </ul>
+            </div>
+
+            <div class="code-block">lifeline_friend:
+    cmp LifelineFriend, 1
+    je lifeline_used
+    mov LifelineFriend, 1
+    call ReprintQuestion
+    ret
+    
+lifeline_used:
+    ; Print the "lifeline already used" prompt
+    mov ecx, 3
+    xor esi, esi
+print_loop_used:
+    mov eax, [LifelineUsedPrompt + esi*4]  ; get pointer to each line
+    mov edx, eax
+    call WriteString
+    call Crlf
+    inc esi
+    loop print_loop_used
+
+    call WaitMsg         ; wait for user to see message
+
+    ; Redisplay the current question (same as ReprintQuestion)
+    call ReprintQuestion
+
+    ret
+HandleLifeline ENDP</div>
+            
+            <div class="explanation">
+                <h3>Lines 271-298: Ask A Friend Lifeline Handler and Lifeline Already Used Handler</h3>
+                <p><strong>What it does:</strong> Handles the Ask A Friend lifeline and displays error message when user tries to use an already-used lifeline.</p>
+                <p><strong>How it works:</strong></p>
+                <ul>
+                    <li><strong>Lines 271-276:</strong> Ask A Friend lifeline handler:
+                        <ul>
+                            <li>Checks if lifeline already used</li>
+                            <li>Marks lifeline as used</li>
+                            <li>Calls <code>ReprintQuestion</code> to show question again</li>
+                        </ul>
+                    </li>
+                    <li><strong>Lines 278-297:</strong> Lifeline already used handler:
+                        <ul>
+                            <li><strong>Lines 280-281:</strong> Sets up loop to print 3 lines from LifelineUsedPrompt array</li>
+                            <li><strong>Lines 282-288:</strong> Loops through and displays the "lifeline already used" message in box format</li>
+                            <li><strong>Line 290:</strong> <code>call WaitMsg</code> - Waits for user to press a key</li>
+                            <li><strong>Line 293:</strong> <code>call ReprintQuestion</code> - Redisplays the current question</li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="note">
+                    <strong>Note:</strong> The Ask A Friend lifeline currently just reprints the question. In a full implementation, it could show a simulated friend's answer.
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 9: Utility Procedures -->
+        <div class="section">
+            <h2>Section 9: Utility Procedures</h2>
+            
+            <div class="code-block">; Reprint question after lifeline
+ReprintQuestion PROC
+    call Intro
+    cmp ShowCorrectFlag, 1
+    jne skip_correct2
+    call Correct_Answer
+skip_correct2:
+    mov ecx, 8
+    mov esi, 0
+reprint_loop:
+    mov edx, CurrentQuestion
+    mov edx, [edx+esi*4]
+    call WriteString
+    call Crlf
+    inc esi
+    loop reprint_loop
+    ret
+ReprintQuestion ENDP</div>
+            
+            <div class="explanation">
+                <h3>Lines 300-317: ReprintQuestion Procedure</h3>
+                <p><strong>What it does:</strong> Redisplays the question box (all 8 lines) after using certain lifelines.</p>
+                <p><strong>Why it's used:</strong> After using the Ask A Friend lifeline or when a lifeline is already used, the question needs to be shown again so user can answer.</p>
+                <p><strong>How it works:</strong> Similar to the question display in AskQuestion - clears screen with Intro, shows prize if needed, loops through question array (8 lines) to print the complete question box.</p>
+            </div>
+
+            <div class="code-block">Correct_Answer PROC
+    ; Display correct answer message based on current question
+    mov eax, CurrentQuestionNum
+    cmp eax, 1
+    je show_correct1
+    cmp eax, 2
+    je show_correct2
+    cmp eax, 3
+    je show_correct3
+    cmp eax, 4
+    je show_correct4
+    cmp eax, 5
+    je show_correct5
+    ret
+
+show_correct1:
+    mov esi, offset Correct1
+    jmp print_correct_lines
+show_correct2:
+    mov esi, offset Correct2
+    jmp print_correct_lines
+show_correct3:
+    mov esi, offset Correct3
+    jmp print_correct_lines
+show_correct4:
+    mov esi, offset Correct4
+    jmp print_correct_lines
+show_correct5:
+    mov esi, offset Correct5
+
+print_correct_lines:
+    mov ecx, 3      ; each CorrectX array has 3 lines: Q1, prize msg, F1
+    mov edi, 0
+print_loop_correct:
+    mov edx, [esi+edi*4]
+    call WriteString
+    call Crlf
+    inc edi
+    loop print_loop_correct
+    ret
+Correct_Answer ENDP</div>
+            
+            <div class="explanation">
+                <h3>Lines 319-359: Correct_Answer Procedure</h3>
+                <p><strong>What it does:</strong> Displays the "Correct Answer! Total Prize: X Crore" message in box format with the appropriate prize amount.</p>
+                <p><strong>How it works - Line by Line:</strong></p>
+                <ul>
+                    <li><strong>Line 321:</strong> <code>mov eax, CurrentQuestionNum</code> - Loads question number (1-5) into EAX</li>
+                    <li><strong>Lines 322-331:</strong> Compares question number and jumps to appropriate correct message array:
+                        <ul>
+                            <li>Q1 → Correct1 (1 Crore)</li>
+                            <li>Q2 → Correct2 (3 Crore)</li>
+                            <li>Q3 → Correct3 (4 Crore)</li>
+                            <li>Q4 → Correct4 (5 Crore)</li>
+                            <li>Q5 → Correct5 (7 Crore)</li>
+                        </ul>
+                    </li>
+                    <li><strong>Lines 334-348:</strong> Each label (show_correct1, etc.) loads the corresponding CorrectX array address and jumps to print routine</li>
+                    <li><strong>Lines 350-358:</strong> print_correct_lines loop displays all 3 lines from the CorrectX array (top border Q1, prize message, bottom border F1)</li>
+                </ul>
+            </div>
+
+            <div class="code-block">Wrong_Answer PROC
+    ; Display the wrong answer message
+    mov esi, offset Wrong   ; point to Wrong array
+    mov ecx, 3              ; 3 lines to print
+    xor edi, edi            ; index = 0
+print_wrong_loop:
+    mov edx, [esi + edi*4]  ; get pointer to line
+    call WriteString
+    call Crlf
+    inc edi
+    loop print_wrong_loop
+
+    ; Wait for key before exit
+    call WaitMsg            ; <-- ensures user sees the message
+    exit
+Wrong_Answer ENDP</div>
+            
+            <div class="explanation">
+                <h3>Lines 361-376: Wrong_Answer Procedure</h3>
+                <p><strong>What it does:</strong> Displays "Wrong Answer" message in box format and terminates the program.</p>
+                <p><strong>How it works:</strong></p>
+                <ul>
+                    <li><strong>Line 363:</strong> <code>mov esi, offset Wrong</code> - Loads address of Wrong array (contains Q1, W1, F1)</li>
+                    <li><strong>Line 364:</strong> <code>mov ecx, 3</code> - Sets loop counter to 3 (3 lines in Wrong array)</li>
+                    <li><strong>Line 365:</strong> <code>xor edi, edi</code> - Sets index to 0 (clears EDI)</li>
+                    <li><strong>Lines 366-371:</strong> Loop displays all 3 lines from Wrong array (top border Q1, wrong message W1, bottom border F1)</li>
+                    <li><strong>Line 374:</strong> <code>call WaitMsg</code> - Waits for user to press a key before exiting (ensures user sees the message)</li>
+                    <li><strong>Line 375:</strong> <code>exit</code> - Terminates program immediately (game over)</li>
+                </ul>
+            </div>
+
+            <div class="code-block">Intro PROC
+    call ClrScr
+    mov edx, offset title1
+    call WriteString
+    mov ecx, 39      
+    mov esi, 0      
+print_loop:
+    mov edx, drawing[esi*4]
+    call WriteString
+    call Crlf
+    inc esi
+    loop print_loop
+    call Crlf
+    ret
+Intro ENDp</div>
+            
+            <div class="explanation">
+                <h3>Lines 380-394: Intro Procedure</h3>
+                <p><strong>What it does:</strong> Clears the screen and displays the game title and ASCII art.</p>
+                <p><strong>How it works - Line by Line:</strong></p>
+                <ul>
+                    <li><strong>Line 381:</strong> <code>call ClrScr</code> - Clears the console screen (Irvine32 function)</li>
+                    <li><strong>Line 382:</strong> <code>mov edx, offset title1</code> - Loads title address</li>
+                    <li><strong>Line 383:</strong> <code>call WriteString</code> - Displays "*** WELCOME TO KAUN BANAY GA CRORE PATTI ***"</li>
+                    <li><strong>Line 384:</strong> <code>mov ecx, 39</code> - Sets loop counter to 39 (number of ASCII art lines)</li>
+                    <li><strong>Line 385:</strong> <code>mov esi, 0</code> - Sets array index to 0</li>
+                    <li><strong>Line 386:</strong> <code>print_loop:</code> - Loop label</li>
+                    <li><strong>Line 387:</strong> <code>mov edx, drawing[esi*4]</code> - Gets address of line at index ESI
+                        <ul>
+                            <li><code>drawing[esi*4]</code> accesses array element (each DWORD is 4 bytes)</li>
+                        </ul>
+                    </li>
+                    <li><strong>Line 388:</strong> <code>call WriteString</code> - Prints the ASCII art line</li>
+                    <li><strong>Line 389:</strong> <code>call Crlf</code> - New line</li>
+                    <li><strong>Line 390:</strong> <code>inc esi</code> - Increments index</li>
+                    <li><strong>Line 391:</strong> <code>loop print_loop</code> - Loops until ECX reaches 0</li>
+                    <li><strong>Line 392:</strong> <code>call Crlf</code> - Extra new line after art</li>
+                </ul>
+            </div>
+
+            <div class="code-block">ShowLifelineMenu PROC
+    call Crlf
+    mov ecx, 8      
+    mov esi, 0      
+print_loop:
+    mov edx, LifelineMenuPrompt[esi*4]
+    call WriteString
+    call Crlf
+    inc esi
+    loop print_loop
+
+get_input:
+    call Crlf
+    mov edx, offset Input
+    mov ecx, sizeof Input
+    call ReadString
+    ret
+ShowLifelineMenu ENDP</div>
+            
+            <div class="explanation">
+                <h3>Lines 396-413: ShowLifelineMenu Procedure</h3>
+                <p><strong>What it does:</strong> Displays the lifeline menu in box format showing all 2 lifelines and gets user's lifeline choice.</p>
+                <p><strong>How it works - Line by Line:</strong></p>
+                <ul>
+                    <li><strong>Line 397:</strong> <code>call Crlf</code> - Prints a new line</li>
+                    <li><strong>Line 398:</strong> <code>mov ecx, 8</code> - Sets loop counter to 8 (8 lines in LifelineMenuPrompt array)</li>
+                    <li><strong>Line 399:</strong> <code>mov esi, 0</code> - Sets array index to 0</li>
+                    <li><strong>Lines 400-405:</strong> Loop displays all 8 lines from LifelineMenuPrompt array (top border, menu header, empty line, lifeline options, empty line, prompt, bottom border)</li>
+                    <li><strong>Lines 407-411:</strong> Gets user input for lifeline selection (1-2)</li>
+                </ul>
+            </div>
+
+            <div class="code-block">; DisplayQuestion5050: shows the 50:50 version of the current question
+; Uses CurrentQuestionNum to select the appropriate QuestionXnot array
+DisplayQuestion5050 PROC
+    call ClrScr
+    mov edx, offset title1
+    call WriteString
+
+    ; Print the drawing
+    mov ecx, 39
+    mov esi, 0
+draw_loop_5050:
+    mov edx, drawing[esi*4]
+    call WriteString
+    call Crlf
+    inc esi
+    loop draw_loop_5050
+    call Crlf
+
+    ; Select the correct 50:50 question array
+    mov eax, CurrentQuestionNum
+    cmp eax, 1
+    je show_q1_not
+    cmp eax, 2
+    je show_q2_not
+    cmp eax, 3
+    je show_q3_not
+    cmp eax, 4
+    je show_q4_not
+    cmp eax, 5
+    je show_q5_not
+
+    jmp done_5050
+
+show_q1_not:
+    mov esi, offset Question1not
+    jmp print_5050_question
+show_q2_not:
+    mov esi, offset Question2not
+    jmp print_5050_question
+show_q3_not:
+    mov esi, offset Question3not
+    jmp print_5050_question
+show_q4_not:
+    mov esi, offset Question4not
+    jmp print_5050_question
+show_q5_not:
+    mov esi, offset Question5not
+
+print_5050_question:
+    mov ecx, 8          ; 8 lines in QuestionXnot arrays
+    mov edi, 0
+print_loop_5050:
+    mov edx, [esi+edi*4]
+    call WriteString
+    call Crlf
+    inc edi
+    loop print_loop_5050
+
+done_5050:
+    call Crlf
+    ret
+DisplayQuestion5050 ENDP</div>
+            
+            <div class="explanation">
+                <h3>Lines 415-476: DisplayQuestion5050 Procedure</h3>
+                <p><strong>What it does:</strong> Displays the question box with only 2 options remaining (using the QuestionXnot array format).</p>
+                <p><strong>How it works - Line by Line:</strong></p>
+                <ul>
+                    <li><strong>Line 418:</strong> <code>call ClrScr</code> - Clears the screen</li>
+                    <li><strong>Lines 419-431:</strong> Displays title and ASCII art (similar to Intro procedure)</li>
+                    <li><strong>Lines 434-444:</strong> Uses CurrentQuestionNum to select the appropriate QuestionXnot array (Question1not through Question5not)</li>
+                    <li><strong>Lines 446-461:</strong> Each label loads the corresponding QuestionXnot array address and jumps to print routine</li>
+                    <li><strong>Lines 463-471:</strong> print_5050_question loop displays all 8 lines from the QuestionXnot array (question box with 2 options hidden, showing only the correct answer and one wrong answer)</li>
+                </ul>
+                <div class="note">
+                    <strong>Note:</strong> The QuestionXnot arrays use empty lines (C1) to replace the hidden options, so the question box format is maintained while showing only 2 options.
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 10: Program End -->
+        <div class="section">
+            <h2>Section 10: Program Termination</h2>
+            
+            <div class="code-block">END main</div>
+            
+            <div class="explanation">
+                <h3>Line 472: END main</h3>
+                <p><strong>What it does:</strong> Marks the end of the assembly program and specifies that execution should start at the <code>main</code> procedure.</p>
+                <p><strong>Why it's used:</strong> The assembler needs to know where the program ends and which procedure is the entry point.</p>
+                <p><strong>How it works:</strong> When the program is compiled and run, the operating system will start execution at the <code>main</code> procedure.</p>
+            </div>
+        </div>
+
+        <!-- Summary Section -->
+        <div class="section">
+            <h2>Summary: Program Flow</h2>
+            <div class="explanation">
+                <h3>Overall Program Flow:</h3>
+                <ol>
+                    <li><strong>Program Starts:</strong> Execution begins at <code>main</code> procedure</li>
+                    <li><strong>Question Loop:</strong> For each question (1-5):
+                        <ul>
+                            <li>Call <code>AskQuestion</code> with question data</li>
+                            <li><code>AskQuestion</code> displays intro (title + ASCII art)</li>
+                            <li>Shows prize if not first question</li>
+                            <li>Displays question box with 4 answer options (in formatted box with borders)</li>
+                            <li>Gets user input</li>
+                            <li>If 'E' or 'e', shows lifeline menu (50:50 or Ask A Friend)</li>
+                            <li>If lifeline used, processes it (50:50 shows 2 options, Ask A Friend reprints question) and gets answer again</li>
+                            <li>Compares answer with correct answer</li>
+                            <li>If correct: shows prize message in box format and continues to next question</li>
+                            <li>If wrong: shows error message in box format and exits</li>
+                        </ul>
+                    </li>
+                    <li><strong>Program Ends:</strong> After all 5 questions answered correctly, or on first wrong answer</li>
+                </ol>
+                
+                <h3>Key Concepts Used:</h3>
+                <ul>
+                    <li><strong>Arrays:</strong> Storing multiple related values (question arrays with 8 elements, drawing array, lifeline menu arrays)</li>
+                    <li><strong>Box Format:</strong> Questions and messages displayed in formatted boxes using borders (| and _)</li>
+                    <li><strong>Procedures:</strong> Reusable code blocks (AskQuestion, Intro, DisplayQuestion5050, etc.)</li>
+                    <li><strong>Registers:</strong> EAX, EBX, ECX, EDX, ESI, EDI for data manipulation</li>
+                    <li><strong>Memory Addressing:</strong> Using OFFSET and [address] to access data and dereference pointers</li>
+                    <li><strong>Conditional Jumps:</strong> je (jump if equal), jne (jump if not equal) for decision making</li>
+                    <li><strong>Loops:</strong> Using LOOP instruction and ECX register</li>
+                    <li><strong>String Operations:</strong> WriteString, ReadString, ClrScr, Crlf, WaitMsg from Irvine32 library</li>
+                    <li><strong>50:50 Lifeline:</strong> Uses separate QuestionXnot arrays that replace hidden options with empty lines</li>
+                </ul>
+            </div>
+        </div>
+
+        <div style="margin-top: 50px; padding-top: 20px; border-top: 2px solid #3498db; text-align: center; color: #666;">
+            <p>End of Code Explanation</p>
+            <p style="font-size: 12px; margin-top: 10px;">Press Ctrl+P to print/save as PDF</p>
+        </div>
+    </div>
+</body>
+</html>
+
