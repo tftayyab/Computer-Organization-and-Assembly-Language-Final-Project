@@ -1,8 +1,9 @@
+
 INCLUDE Irvine32.inc
 
 .data
 
-title1 BYTE "WELCOME TO KAUN BANAY GA CRORE PATTI",0
+title1 BYTE "                        *** WELCOME TO KAUN BANAY GA CRORE PATTI ***                            ",0
 
 ;Drawing of amitab bachan
 L1 BYTE "                                                                                                    ",0
@@ -48,46 +49,53 @@ L39 BYTE "            #%#+#*%%%%%@%%%%@@@%%#+::*%%%%#######*****######%#########
 drawing DWORD OFFSET L1, OFFSET L2, OFFSET L3, OFFSET L4, OFFSET L5, OFFSET L6, OFFSET L7, OFFSET L8, OFFSET L9, OFFSET L10, OFFSET L11, OFFSET L12, OFFSET L13, OFFSET L14, OFFSET L15, OFFSET L16, OFFSET L17, OFFSET L18, OFFSET L19, OFFSET L20, OFFSET L21, OFFSET L22, OFFSET L23, OFFSET L24, OFFSET L25, OFFSET L26, OFFSET L27, OFFSET L28, OFFSET L29, OFFSET L30, OFFSET L31, OFFSET L32, OFFSET L33, OFFSET L34, OFFSET L35, OFFSET L36, OFFSET L37, OFFSET L38, OFFSET L39
 
 ; Question 1
-Q1 BYTE "1. Who wrote Romeo and Juliet? ",0
-A1 BYTE "A. Charles Dickens",0
-B1 BYTE "B. William Shakespeare",0
-C1 BYTE "C. Jane Austen",0
-D1 BYTE "D. Mark Twain",0
+Q1 BYTE " _____________________________________________________________________________________________________ ",0
+A1 BYTE "|                                             QUESTION 1                                              |",0
+B1 BYTE "|                                     Who wrote Romeo and Juliet?                                     |",0
+C1 BYTE "|                                                                                                     |",0
+D1 BYTE "|       A. Charles Dickens                                                  C. Jane Austen            |",0
+E1 BYTE "|       B. William Shakespeare                                              D. Mark Twain             |",0 
+G1 BYTE "|                                        E. Choose a lifeline                                         |",0
+F1 BYTE "|_____________________________________________________________________________________________________|",0
 
 ; Question 2
-Q2 BYTE "2. Which ocean is the largest in the world?",0
-A2 BYTE "A. Atlantic Ocean",0
-B2 BYTE "B. Indian Ocean",0
-C2 BYTE "C. Arctic Ocean",0
-D2 BYTE "D. Pacific Ocean",0
+A2 BYTE "|                                             QUESTION 2                                              |",0
+B2 BYTE "|                               Which ocean is the largest in the world?                              |",0
+D2 BYTE "|       A. Atlantic Ocean                                                   C. Arctic Ocean           |",0
+E2 BYTE "|       B. Indian Ocean                                                     D. Pacific Ocean          |",0
 
 ; Question 3
-Q3 BYTE "3. Which human sense develops first before birth?",0
-A3 BYTE "A. Hearing",0
-B3 BYTE "B. Taste",0
-C3 BYTE "C. Smell",0
-D3 BYTE "D. Touch",0
+A3 BYTE "|                                             QUESTION 3                                              |",0
+B3 BYTE "|                           Which human sense develops first before birth?                            |",0
+D3 BYTE "|       A. Hearing                                                          C. Smell                  |",0
+E3 BYTE "|       B. Taste                                                            D. Touch                  |",0
 
 ; Question 4
-Q4 BYTE "4. Which of these everyday items was originally invented for medical use?",0
-A4 BYTE "A. Sunglasses",0
-B4 BYTE "B. Bubble Wrap",0
-C4 BYTE "C. Microwaves",0
-D4 BYTE "D. Velcro",0
+A4 BYTE "|                                             QUESTION 4                                              |",0
+B4 BYTE "|                 Which of these everyday items was originally invented for medical use?              |",0
+D4 BYTE "|       A. Sunglasses                                                       C. Microwaves             |",0
+E4 BYTE "|       B. Bubble Wrap                                                      D. Velcro                 |",0
 
 ; Question 5
-Q5 BYTE "5. Which country is known as the Land of the Rising Sun?",0
-A5 BYTE "A. China",0
-B5 BYTE "B. Japan",0
-C5 BYTE "C. Thailand",0
-D5 BYTE "D. South Korea",0
+A5 BYTE "|                                             QUESTION 5                                              |",0
+B5 BYTE "|                        Which country is known as the Land of the Rising Sun?                        |",0
+D5 BYTE "|       A. China                                                            C. Thailand               |",0
+E5 BYTE "|       B. Japan                                                            D. South Korea            |",0
 
 ; Questions arrays
-Question1 DWORD OFFSET Q1, OFFSET A1, OFFSET B1, OFFSET C1, OFFSET D1
-Question2 DWORD OFFSET Q2, OFFSET A2, OFFSET B2, OFFSET C2, OFFSET D2
-Question3 DWORD OFFSET Q3, OFFSET A3, OFFSET B3, OFFSET C3, OFFSET D3
-Question4 DWORD OFFSET Q4, OFFSET A4, OFFSET B4, OFFSET C4, OFFSET D4
-Question5 DWORD OFFSET Q5, OFFSET A5, OFFSET B5, OFFSET C5, OFFSET D5
+Question1 DWORD OFFSET Q1, OFFSET A1, OFFSET B1, OFFSET C1, OFFSET D1, OFFSET E1, OFFSET G1, OFFSET F1
+Question2 DWORD OFFSET Q1, OFFSET A2, OFFSET B2, OFFSET C1, OFFSET D2, OFFSET E2, OFFSET G1, OFFSET F1
+Question3 DWORD OFFSET Q1, OFFSET A3, OFFSET B3, OFFSET C1, OFFSET D3, OFFSET E3, OFFSET G1, OFFSET F1
+Question4 DWORD OFFSET Q1, OFFSET A4, OFFSET B4, OFFSET C1, OFFSET D4, OFFSET E4, OFFSET G1, OFFSET F1
+Question5 DWORD OFFSET Q1, OFFSET A5, OFFSET B5, OFFSET C1, OFFSET D5, OFFSET E5, OFFSET G1, OFFSET F1
+
+; 5050Questions arrays
+Question1not DWORD OFFSET Q1, OFFSET A1, OFFSET B1, OFFSET C1, OFFSET C1, OFFSET E1, OFFSET G1, OFFSET F1
+Question2not DWORD OFFSET Q1, OFFSET A2, OFFSET B2, OFFSET C1, OFFSET C1, OFFSET E2, OFFSET G1, OFFSET F1
+Question3not DWORD OFFSET Q1, OFFSET A3, OFFSET B3, OFFSET C1, OFFSET D3, OFFSET C1, OFFSET G1, OFFSET F1
+Question4not DWORD OFFSET Q1, OFFSET A4, OFFSET B4, OFFSET C1, OFFSET C1, OFFSET E4, OFFSET G1, OFFSET F1
+Question5not DWORD OFFSET Q1, OFFSET A5, OFFSET B5, OFFSET C1, OFFSET C1, OFFSET E5, OFFSET G1, OFFSET F1
+
 
 Answer1 BYTE "B",0 
 Answer2 BYTE "D",0
@@ -95,31 +103,39 @@ Answer3 BYTE "A",0
 Answer4 BYTE "B",0
 Answer5 BYTE "B",0
 
-Wrong BYTE "Wrong Answer",0
-Correct BYTE "Correct Answer! Total Prize: ",0
-Crore1 BYTE "1 Crore",0
-Crore3 BYTE "3 Crore",0
-Crore4 BYTE "4 Crore",0
-Crore5 BYTE "5 Crore",0
-Crore7 BYTE "7 Crore",0
+;Wrong Answer
+W1 BYTE "|                                             WRONG ANSWER                                            |",0
+
+Wrong DWORD OFFSET Q1, OFFSET W1, OFFSET F1
+;Correct Answer
+Crore1 BYTE "|                                  Correct Answer! Total Prize: 1 Crore                               |",0
+Crore3 BYTE "|                                  Correct Answer! Total Prize: 3 Crore                               |",0
+Crore4 BYTE "|                                  Correct Answer! Total Prize: 4 Crore                               |",0
+Crore5 BYTE "|                                  Correct Answer! Total Prize: 5 Crore                               |",0
+Crore7 BYTE       "|                                  Correct Answer! Total Prize: 7 Crore                               |",0
+
+Correct1 DWORD OFFSET Q1,OFFSET Crore1,OFFSET F1
+Correct2 DWORD OFFSET Q1,OFFSET Crore3,OFFSET F1
+Correct3 DWORD OFFSET Q1,OFFSET Crore4,OFFSET F1
+Correct4 DWORD OFFSET Q1,OFFSET Crore5,OFFSET F1
+Correct5 DWORD OFFSET Q1,OFFSET Crore7,OFFSET F1
+
 Input BYTE 2,0
 
 ; Lifeline tracking
 Lifeline5050 DWORD 0
-LifelineAudience DWORD 0
 LifelineFriend DWORD 0
-LifelineExpert DWORD 0
+
 
 ; Lifeline strings
-LifelineOption BYTE "E. Choose a lifeline",0
-LifelineMenu BYTE "Available Lifelines:",0
-Lifeline1 BYTE "1. 50:50",0
-Lifeline2 BYTE "2. Audience Vote",0
-Lifeline3 BYTE "3. Ask A Friend",0
-Lifeline4 BYTE "4. Ask an Expert",0
-LifelineUsed BYTE " (USED)",0
-LifelineUsedMsg BYTE "This lifeline has already been used!",0
-ChooseLifeline BYTE "Choose a lifeline (1-4) or press any other key to go back: ",0
+LifelineMenu BYTE    "|                                    Available Lifelines                                              |",0
+Lifeline1 BYTE       "|                                         1. 50:50                                                    |",0
+Lifeline2 BYTE       "|                                      2. Ask A Friend                                                |",0
+LifelineUsedMsg BYTE "|                              This lifeline has already been used!                                   |",0
+ChooseLifeline BYTE  "|                      Choose a lifeline (1-2) or press any other key to go back:                     | ",0
+
+LifelineMenuPrompt DWORD OFFSET Q1, OFFSET LifelineMenu, OFFSET C1, OFFSET Lifeline1, OFFSET Lifeline2, OFFSET C1, OFFSET ChooseLifeline, OFFSET F1
+LifelineUsedPrompt DWORD OFFSET Q1, OFFSET LifelineUsedMsg, OFFSET F1
 
 ; Global variables for generic question procedure
 CurrentQuestion DWORD 0
@@ -178,7 +194,7 @@ question_loop:
 skip_correct:
     
     ; Display question
-    mov ecx, 5
+    mov ecx, 8
     mov esi, 0
 print_loop:
     mov edx, CurrentQuestion
@@ -187,10 +203,6 @@ print_loop:
     call Crlf
     inc esi
     loop print_loop
-    
-    mov edx, offset LifelineOption
-    call WriteString
-    call Crlf
     
     mov edx, offset Input
     mov ecx, sizeof Input
@@ -241,11 +253,7 @@ HandleLifeline PROC
     cmp bl, '1'
     je lifeline_5050
     cmp bl, '2'
-    je lifeline_audience
-    cmp bl, '3'
     je lifeline_friend
-    cmp bl, '4'
-    je lifeline_expert
     ret
     
 lifeline_5050:
@@ -260,13 +268,6 @@ lifeline_5050:
     call DisplayQuestion5050
     ret
     
-lifeline_audience:
-    cmp LifelineAudience, 1
-    je lifeline_used
-    mov LifelineAudience, 1
-    call ReprintQuestion
-    ret
-    
 lifeline_friend:
     cmp LifelineFriend, 1
     je lifeline_used
@@ -274,19 +275,26 @@ lifeline_friend:
     call ReprintQuestion
     ret
     
-lifeline_expert:
-    cmp LifelineExpert, 1
-    je lifeline_used
-    mov LifelineExpert, 1
-    call ReprintQuestion
-    ret
-    
 lifeline_used:
-    mov edx, offset LifelineUsedMsg
+    ; Print the "lifeline already used" prompt
+    mov ecx, 3
+    xor esi, esi
+print_loop_used:
+    mov eax, [LifelineUsedPrompt + esi*4]  ; get pointer to each line
+    mov edx, eax
     call WriteString
     call Crlf
-    call WaitMsg
+    inc esi
+    loop print_loop_used
+
+    call WaitMsg         ; wait for user to see message
+
+    ; Redisplay the current question (same as ReprintQuestion)
+    call ReprintQuestion
+
     ret
+
+
 HandleLifeline ENDP
 
 ; Reprint question after lifeline
@@ -296,7 +304,7 @@ ReprintQuestion PROC
     jne skip_correct2
     call Correct_Answer
 skip_correct2:
-    mov ecx, 5
+    mov ecx, 8
     mov esi, 0
 reprint_loop:
     mov edx, CurrentQuestion
@@ -305,67 +313,69 @@ reprint_loop:
     call Crlf
     inc esi
     loop reprint_loop
-    mov edx, offset LifelineOption
-    call WriteString
-    call Crlf
     ret
 ReprintQuestion ENDP
 
 Correct_Answer PROC
-    mov edx, offset Correct
-    call WriteString
-    
-    ; Display appropriate Crore text based on question number
+    ; Display correct answer message based on current question
     mov eax, CurrentQuestionNum
     cmp eax, 1
-    je show_1_crore
+    je show_correct1
     cmp eax, 2
-    je show_3_crore
+    je show_correct2
     cmp eax, 3
-    je show_4_crore
+    je show_correct3
     cmp eax, 4
-    je show_5_crore
+    je show_correct4
     cmp eax, 5
-    je show_7_crore
+    je show_correct5
     ret
-    
-show_1_crore:
-    mov edx, offset Crore1
+
+show_correct1:
+    mov esi, offset Correct1
+    jmp print_correct_lines
+show_correct2:
+    mov esi, offset Correct2
+    jmp print_correct_lines
+show_correct3:
+    mov esi, offset Correct3
+    jmp print_correct_lines
+show_correct4:
+    mov esi, offset Correct4
+    jmp print_correct_lines
+show_correct5:
+    mov esi, offset Correct5
+
+print_correct_lines:
+    mov ecx, 3      ; each CorrectX array has 3 lines: Q1, prize msg, QF
+    mov edi, 0
+print_loop_correct:
+    mov edx, [esi+edi*4]
     call WriteString
     call Crlf
-    ret
-    
-show_3_crore:
-    mov edx, offset Crore3
-    call WriteString
-    call Crlf
-    ret
-    
-show_4_crore:
-    mov edx, offset Crore4
-    call WriteString
-    call Crlf
-    ret
-    
-show_5_crore:
-    mov edx, offset Crore5
-    call WriteString
-    call Crlf
-    ret
-    
-show_7_crore:
-    mov edx, offset Crore7
-    call WriteString
-    call Crlf
+    inc edi
+    loop print_loop_correct
     ret
 Correct_Answer ENDP
 
 Wrong_Answer PROC
-    mov edx, offset Wrong
+    ; Display the wrong answer message
+    mov esi, offset Wrong   ; point to Wrong array
+    mov ecx, 3              ; 3 lines to print
+    xor edi, edi            ; index = 0
+print_wrong_loop:
+    mov edx, [esi + edi*4]  ; get pointer to line
     call WriteString
     call Crlf
+    inc edi
+    loop print_wrong_loop
+
+    ; Wait for key before exit
+    call WaitMsg            ; <-- ensures user sees the message
     exit
 Wrong_Answer ENDP
+
+
 
 Intro PROC
     call ClrScr
@@ -385,88 +395,85 @@ Intro ENDp
 
 ShowLifelineMenu PROC
     call Crlf
-    mov edx, offset LifelineMenu
+    mov ecx, 8      
+    mov esi, 0      
+print_loop:
+    mov edx, LifelineMenuPrompt[esi*4]
     call WriteString
     call Crlf
-    
-    mov edx, offset Lifeline1
-    call WriteString
-    cmp Lifeline5050, 1
-    jne show_l2
-    mov edx, offset LifelineUsed
-    call WriteString
-show_l2:
-    call Crlf
-    
-    mov edx, offset Lifeline2
-    call WriteString
-    cmp LifelineAudience, 1
-    jne show_l3
-    mov edx, offset LifelineUsed
-    call WriteString
-show_l3:
-    call Crlf
-    
-    mov edx, offset Lifeline3
-    call WriteString
-    cmp LifelineFriend, 1
-    jne show_l4
-    mov edx, offset LifelineUsed
-    call WriteString
-show_l4:
-    call Crlf
-    
-    mov edx, offset Lifeline4
-    call WriteString
-    cmp LifelineExpert, 1
-    jne get_input
-    mov edx, offset LifelineUsed
-    call WriteString
+    inc esi
+    loop print_loop
+
 get_input:
     call Crlf
-    
-    mov edx, offset ChooseLifeline
-    call WriteString
     mov edx, offset Input
     mov ecx, sizeof Input
     call ReadString
     ret
 ShowLifelineMenu ENDP
 
+; DisplayQuestion5050: shows the 50:50 version of the current question
+; Uses CurrentQuestionNum to select the appropriate QuestionXnot array
 DisplayQuestion5050 PROC
-    mov edi, esi
-    mov ebp, ebx
-    call Intro
-    cmp ShowCorrectFlag, 1
-    jne skip_correct_5050
-    call Correct_Answer
-skip_correct_5050:
-    mov esi, edi
-    mov ebx, ebp
-    
-    mov edx, [esi]
+    call ClrScr
+    mov edx, offset title1
+    call WriteString
+
+    ; Print the drawing
+    mov ecx, 39
+    mov esi, 0
+draw_loop_5050:
+    mov edx, drawing[esi*4]
     call WriteString
     call Crlf
-    
-    mov edx, [esi+ebx*4+4]
-    call WriteString
+    inc esi
+    loop draw_loop_5050
     call Crlf
-    
-    cmp ebx, 0
-    je show_b_option
-    mov edx, [esi+4]
-    call WriteString
-    call Crlf
+
+    ; Select the correct 50:50 question array
+    mov eax, CurrentQuestionNum
+    cmp eax, 1
+    je show_q1_not
+    cmp eax, 2
+    je show_q2_not
+    cmp eax, 3
+    je show_q3_not
+    cmp eax, 4
+    je show_q4_not
+    cmp eax, 5
+    je show_q5_not
+
     jmp done_5050
-    
-show_b_option:
-    mov edx, [esi+8]
+
+show_q1_not:
+    mov esi, offset Question1not
+    jmp print_5050_question
+show_q2_not:
+    mov esi, offset Question2not
+    jmp print_5050_question
+show_q3_not:
+    mov esi, offset Question3not
+    jmp print_5050_question
+show_q4_not:
+    mov esi, offset Question4not
+    jmp print_5050_question
+show_q5_not:
+    mov esi, offset Question5not
+
+print_5050_question:
+    mov ecx, 8          ; 7 lines in QuestionXnot arrays
+    mov edi, 0
+print_loop_5050:
+    mov edx, [esi+edi*4]
     call WriteString
     call Crlf
-    
+    inc edi
+    loop print_loop_5050
+
 done_5050:
     call Crlf
     ret
 DisplayQuestion5050 ENDP
+
 
 END main
